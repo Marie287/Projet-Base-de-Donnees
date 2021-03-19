@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 1%;
+    padding: 2%;
+}
+
+.col,
+button {
+    margin: 1%;
+}
+
+body {
+    margin-top: 3%;
+}

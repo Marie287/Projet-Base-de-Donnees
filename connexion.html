@@ -1,0 +1,74 @@
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Connexion</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/connexion.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="./php/liste.php">Accueil</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="./inscription.html">Inscription</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="alert" class="alert alert-success" role="alert" hidden>
+    Vous avez été inscrit avec succès ! Vous pouvez désormais vous connecter.
+  </div>
+  <div id="alert-c" class="alert alert-danger" role="alert" hidden>
+    Vous devez vous connecter pour accèder à cette page.
+  </div>
+  <div id="alert-e" class="alert alert-danger" role="alert" hidden>
+    Ce couple login, mot de passe n'existe pas.
+  </div>
+  <h1>Connexion</h1>
+  <form action="./php/validateConnexion.php" method="post">
+    <div class="row">
+      <label for="inputLogin">Nom d'utilisateur</label>
+      <input type="text" class="form-control" id="inputLogin" name="login" placeholder="Nom d'utilisateur" required>
+    </div>
+    <div class="row">
+      <label for="inputMdp">Mot de passe</label>
+      <input type="password" id="inputMdp" class="form-control" aria-describedby="passwordHelpBlock" name="mdp" placeholder="Mot de passe" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Se connecter</button>
+  </form>
+
+  <script>
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    var i = getParameterByName('i');
+    var l = getParameterByName('l');
+    var c = getParameterByName('c');
+    var e = getParameterByName('e');
+    let alert = document.getElementById('alert');
+    let alertC = document.getElementById('alert-c');
+    let alertE = document.getElementById('alert-e');
+    let login = document.getElementById('inputLogin');
+    if (i != null && i != "" && i == 1) {
+      alert.removeAttribute('hidden');
+    }
+    if (c != null && c != "" && c == 1) {
+      alertC.removeAttribute('hidden');
+    }
+    if (e != null && e != "" && e == 1) {
+      alertE.removeAttribute('hidden');
+    }
+    if (l != null && l != "") {
+      login.value = l;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Inscription</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/inscription.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="./php/liste.php">Accueil</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="./connexion.html">Connexion</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <br/><br/>
+
+  <h1>Inscription</h1>
+  <form action="./php/validateInscription.php" method="post">
+    <div class="row">
+      <div class="col">
+        <label for="inputName">Prénom</label>
+        <input type="text" class="form-control" id="inputName" name="prenom" placeholder="Prénom" required>
+      </div>
+      <div class="col">
+        <label for="inputLastname">Nom</label>
+        <input type="text" class="form-control" id="inputLastname" name="nom" placeholder="Nom" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="exampleInputEmail1">E-mail</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="nom@exemple.com" required>
+        <div id="alert-err" class="alert alert-danger" role="alert" hidden>
+          Le format de votre adresse e-mail est erroné.
+        </div>
+        <div id="alert-exst" class="alert alert-danger" role="alert" hidden>
+          Cette adresse e-mail est déjà utilisée par un autre compte.
+        </div>
+        <small id="emailHelp" class="form-text text-muted">Votre e-mail ne sera pas partagé.</small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="inputLogin">Nom d'utilisateur</label>
+        <input type="text" class="form-control" id="inputLogin" name="login" placeholder="Nom d'utilisateur" required>
+        <div id="alert-login" class="alert alert-danger" role="alert" hidden>
+          Ce nom d'utilisateur est déjà utilisé par un autre compte.
+        </div>
+      </div>
+      <div class="col">
+        <label for="inputMdp">Mot de passe</label>
+        <input type="password" id="inputMdp" class="form-control" aria-describedby="passwordHelpBlock" name="mdp" placeholder="Mot de passe" required>
+        <small id="passwordHelpBlock" class="form-text text-muted">
+           Votre mot de passe doit contenir entre 6 et 20 caractères.
+        </small>
+      </div>
+    </div>
+    <button class="btn btn-primary" onClick="validate()" type="submit">S'inscrire</button>
+  </form>
+
+  <script>
+    function validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+    function validate() {
+      var prenom = document.getElementById('inputName').value;
+      var nom = document.getElementById('inputLastname').value;
+      var mail = document.getElementById('exampleInputEmail1').value;
+      var login = document.getElementById('inputLogin').value;
+      if (!validateEmail(mail)) {
+          window.location.replace("./inscription.html?e=2&prenom=" + prenom + "&nom=" + nom + "&mail=" + mail + "&login=" + login);
+      }
+    }
+  </script>
+  <script>
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    var e = getParameterByName('e');
+    var l = getParameterByName('l');
+    var prenom = getParameterByName('prenom');
+    var nom = getParameterByName('nom');
+    var mail = getParameterByName('mail');
+    var login = getParameterByName('login');
+    let alerterr = document.getElementById('alert-err');
+    let alertexst = document.getElementById('alert-exst');
+    let alertlogin = document.getElementById('alert-login');
+    if (e != null && e != "" && e == 2) {
+      alerterr.removeAttribute('hidden');
+    } else if (e != null && e != "" && e == 1) {
+      alertexst.removeAttribute('hidden');
+    }
+    if (l != null && l != "" && l == 1) {
+      alertlogin.removeAttribute('hidden');
+    }
+    if (prenom != null && prenom != "") {
+      document.getElementById('inputName').value = prenom;
+    }
+    if (nom != null && nom != "") {
+      document.getElementById('inputLastname').value = nom;
+    }
+    if (mail != null && mail != "") {
+      document.getElementById('exampleInputEmail1').value = mail;
+    }
+    if (login != null && login != "") {
+      document.getElementById('inputLogin').value = login;
+    }
+  </script>
+</body>
+</html>
