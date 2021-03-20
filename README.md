@@ -24,5 +24,5 @@
 * Supprimer un film, une série, ou un épisode de série
 * Gérer les acteurs
 * Gérer les utilisateurs et de leurs abonnements
-* Historique de l'utilisateur : les films ou séries les plus téléchargée, les catégories populaires, les bandes-annonces déjà visionnées
+* Historique de l'utilisateur : les films ou séries les plus téléchargées, les catégories populaires, les bandes-annonces déjà visionnées
 * Recherches de films par mot clé, par catégorie ou par nom d'acteur
